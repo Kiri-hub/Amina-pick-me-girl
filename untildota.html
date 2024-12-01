@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magic Ball</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #1e1e1e;
+        }
+        .container {
+			width: 95%;
+			height: 90%;
+			border-radius: 2%;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+			box-shadow: 0 0 50px rgba(21, 220, 133, 0.7), 0 0 50px rgba(199, 21, 133, 0.5);
+            animation: glow 3s infinite; 
+        }
+        .question {
+            font-size: 24px;
+            color: #f0f0f0;
+            margin-bottom: 20px;
+        }
+
+        .ball {
+			width: 300px;
+			height: 300px;
+			border-radius: 50%;
+			background-image: url("magic.jpg");
+			box-shadow: 0 0 50px rgba(21, 220, 133, 0.7), 0 0 50px rgba(199, 21, 133, 0.5);
+            animation: glow 3s infinite;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+		}
+        .answer {
+            font-size: 24px;
+            color: white;
+            text-align: center;
+            line-height: 19px;
+			color: rgba(21, 220, 133, 0.7);
+        }
+        .question-input {
+            width: 100%;
+            max-width: 300px;
+            padding: 10px;
+            font-size: 16px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+			background-color: black;
+			box-shadow: 0 0 50px rgba(21, 220, 133, 0.7), 0 0 50px rgba(199, 21, 133, 0.5);
+            animation: glow 3s infinite;
+			color: rgba(21, 220, 133, 0.7);
+        }
+        .btn {
+            padding: 10px 20px;
+            font-size: 16px;
+            box-shadow: 0 0 50px rgba(21, 220, 133, 0.7), 0 0 50px rgba(199, 21, 133, 0.5);
+            animation: glow 3s infinite;
+            color: black;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-bottom: 20px;
+        }
+        .btn:hover {
+            background-color: rgb(0, 220, 0);
+        }
+		@keyframes glow {
+            0% {
+                box-shadow: 0 0 50px rgba(21, 220, 133, 0.7), 0 0 50px rgba(199, 21, 133, 0.5);
+            }
+            50% {
+                box-shadow: 0 0 50px rgba(133, 133, 255, 0.7), 0 0 50px rgba(255, 215, 0, 0.7);
+            }
+            100% {
+                box-shadow: 0 0 50px rgba(21, 220, 133, 0.7), 0 0 50px rgba(199, 21, 133, 0.5);
+            }
+        }
+        @media (max-width: 750px) {
+            .ball {
+                width: 150px;
+                height: 150px;
+            }
+            .answer {
+                font-size: 24px;
+            }
+            .question {
+                font-size: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+<script>
+    document.body.innerHTML = `
+	   <div class="container">
+            <input type="text" id="userQuestion" class="question-input" placeholder="Введіть ваше запитання..." />
+            <button class="btn" onclick="getAnswer()">Запитати</button>
+            <div class="ball">
+                <div id="answer" class="answer">Задай питання</div>
+            </div>
+        </div>
+    `;
+    const answers = ["Yes", "No", "Maybe", "Ask again later", "Definitely", "I don't think so"];
+	let count = 0;
+    function getAnswer() {
+	if (count >= 6){
+		alert("Мана закінчилась! Щоб зарядити кулю скажіть свій cvv2 код Богатюку К.І.");
+		return;
+	}
+        const userQuestion = document.getElementById('userQuestion').value;
+        if (userQuestion.trim() === '') {
+            alert('Будь ласка, введіть питання.');
+            return;
+        }
+        const randomIndex = Math.floor(Math.random() * answers.length);
+        document.getElementById('answer').textContent = answers[randomIndex];
+		count++;
+    }
+</script>
+</body>
+</html>
